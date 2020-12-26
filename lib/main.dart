@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsme/presentation/screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,21 +10,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "WhatsMe",
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Welcome"),
-        ),
-        body: Center(
-          child: Container(
-            child: Text("Welcome"),
-          ),
-        ),
-      ),
+      home: SplashScreen()
     );
   }
 }
