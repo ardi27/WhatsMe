@@ -124,7 +124,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           SizedBox(width: 8,),
           Text("+${country.phoneCode}"),
           SizedBox(width: 8,),
-          Text(country.name),
+          Text(country.name,overflow: TextOverflow.ellipsis,),
           Spacer(),
           Icon(Icons.arrow_drop_down)
         ],
