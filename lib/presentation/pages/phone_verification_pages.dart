@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:whatsme/presentation/pages/set_intial_profile_pages.dart';
 import 'package:whatsme/presentation/widgets/theme/String.dart';
 import 'package:whatsme/presentation/widgets/theme/style.dart';
 
@@ -41,7 +42,7 @@ class _PhoneVerificationPagesState extends State<PhoneVerificationPages> {
                 child: MaterialButton(
                   color:greenColor,
                   onPressed: (){
-                    // Navigator.push(context, MaterialPageRoute(builder: (_)=>PhoneVerificationPages()));
+                     Navigator.push(context, MaterialPageRoute(builder: (_)=>SetInitialProfilePages()));
                   },
                   child: Text("Next",style: TextStyle(fontSize: 18,color: Colors.white),),
                 ),
@@ -63,6 +64,7 @@ class _PhoneVerificationPagesState extends State<PhoneVerificationPages> {
             length: 6,
             backgroundColor: Colors.transparent,
             obsecureText: true,
+            textInputType: TextInputType.number,
             onChanged: (value){
               print(value);
             },
