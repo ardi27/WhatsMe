@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "712415611202",
+    "project_id": "whatsme-801c0",
+    "storage_bucket": "whatsme-801c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712415611202:android:24fb3aa1a90ca77b70e0db",
+        "android_client_info": {
+          "package_name": "com.hehe.whatsme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712415611202-ld9vtjjomnd54dudr4nstqramcvv98tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNe5tCopPwRrE6B5BYiz1KfF67BlhL1bs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712415611202-ld9vtjjomnd54dudr4nstqramcvv98tp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
