@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsme/presentation/screens/splash_screen.dart';
+import 'package:whatsme/presentation/widgets/theme/style.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "WhatsMe",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: primaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SplashScreen()

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsme/presentation/screens/home_screen.dart';
 import 'package:whatsme/presentation/widgets/theme/String.dart';
 import 'package:whatsme/presentation/widgets/theme/style.dart';
 
@@ -19,6 +20,7 @@ class _SetInitialProfilePagesState extends State<SetInitialProfilePages> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: Text(
           "Profile Info",
           style: TextStyle(color: greenColor),
@@ -42,7 +44,7 @@ class _SetInitialProfilePagesState extends State<SetInitialProfilePages> {
                 child: MaterialButton(
                   color: greenColor,
                   onPressed: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (_)=>PhoneVerificationPages()));
+                     Navigator.push(context, MaterialPageRoute(builder: (_)=>HomeScreen()));
                   },
                   child: Text(
                     "Next",
