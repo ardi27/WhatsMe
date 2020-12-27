@@ -1,5 +1,6 @@
 import 'package:country_pickers/country_pickers.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsme/presentation/pages/phone_verification_pages.dart';
 import 'package:whatsme/presentation/widgets/theme/String.dart';
 import 'package:whatsme/presentation/widgets/theme/style.dart';
 import 'package:country_pickers/country.dart';
@@ -71,7 +72,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 alignment: Alignment.bottomCenter,
                 child: MaterialButton(
                   color:greenColor,
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>PhoneVerificationPages()));
+                  },
                   child: Text("Next",style: TextStyle(fontSize: 18,color: Colors.white),),
                 ),
               ),
