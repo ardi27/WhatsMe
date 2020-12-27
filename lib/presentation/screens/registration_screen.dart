@@ -41,6 +41,40 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ListTile(
               onTap: _openFilteredCountryPickerDialog,
               title: _buildDialogItem(_selectedFilteredDialogCountry),
+            ),
+            Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(bottom: BorderSide(width: 1.5,color: greenColor))
+                  ),
+                  width: 80,
+                  alignment: Alignment.center,
+                  height: 42,
+                  child: Text("${_selectedFilteredDialogCountry.phoneCode}"),
+                ),
+                SizedBox(width: 8,),
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    child:TextField(
+                      decoration: InputDecoration(
+                        hintText: "Phone Number"
+                      ),
+                    )
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: MaterialButton(
+                  color:greenColor,
+                  onPressed: (){},
+                  child: Text("Next",style: TextStyle(fontSize: 18,color: Colors.white),),
+                ),
+              ),
             )
           ],
         ),
@@ -76,9 +110,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       height: 40,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: greenColor,width: 1)
-        )
+          border: Border(
+              bottom: BorderSide(color: greenColor,width: 1)
+          )
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
