@@ -3,7 +3,7 @@ class GetCurrentUidUseCase{
   final FirebaseRepository repository;
   GetCurrentUidUseCase(this.repository);
 
-  Future<void> call() async {
+  Future<String> call() async {
     return await repository.getCurrentUID();
   }
 }

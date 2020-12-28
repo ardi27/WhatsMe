@@ -1,0 +1,43 @@
+import 'package:whatsme/domain/entities/user_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+class UserModel extends UserEntity {
+  UserModel({
+    String name,
+    String email,
+    String phoneNumber,
+    bool isOnline,
+    String uid,
+    String status,
+    String profileUrl,
+}) : super(
+          name,
+          email,
+          phoneNumber,
+          isOnline,
+          uid,
+          status,
+          profileUrl,
+        );
+  factory UserModel.fromSnapshot (DocumentSnapshot snapshot){
+    return UserModel(
+      name: snapshot.data()['name'],
+      email: snapshot.data()['email'],
+      phoneNumber: snapshot.data()['phoneNumber'],
+      uid: snapshot.data()['uid'],
+      isOnline: snapshot.data()['isOnline'],
+      profileUrl: snapshot.data()['profileUrl'],
+      status: snapshot.data()['status']
+    );
+  }
+  Map<String,dynamic> toDocument(){
+    return {
+      "name": name,
+      "email": email,
+      "phoneNumber": phoneNumber,
+      "uid": uid,
+      "isOnline": isOnline,
+      "profileUrl": profileUrl,
+      "status": status,
+    };
+  }
+}
