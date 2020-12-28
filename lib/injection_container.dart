@@ -11,21 +11,39 @@ import 'package:whatsme/domain/usecases/is_sign_in_use_case.dart';
 import 'package:whatsme/domain/usecases/sign_in_with_phone_number_use_case.dart';
 import 'package:whatsme/domain/usecases/sign_out_use_case.dart';
 import 'package:whatsme/domain/usecases/verifi_phone_number_use_case.dart';
+import 'package:whatsme/presentation/bloc/auth/auth_cubit.dart';
+import 'package:whatsme/presentation/bloc/auth_phone/phone_auth_cubit.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   //future bloc
+  sl.registerFactory<AuthCubit>(() => AuthCubit(
+      getCurrentUidUseCase: sl.call(),
+      isSignInUseCase: sl.call(),
+      signOutUseCase: sl.call()));
+  sl.registerFactory<PhoneAuthCubit>(() => PhoneAuthCubit(
+        getCreateCurrentUserUseCase: sl.call(),
+        signInWithPhoneNumberUseCase: sl.call(),
+        verifyPhoneNumberUseCase: sl.call(),
+      ));
 
   //use case
-  sl.registerLazySingleton<GetCreateCurrentUserUseCase>(() => GetCreateCurrentUserUseCase(repository: sl.call()));
-  sl.registerLazySingleton<GetCurrentUidUseCase>(() => GetCurrentUidUseCase(repository: sl.call()));
-  sl.registerLazySingleton<IsSignInUseCase>(() => IsSignInUseCase(repository: sl.call()));
-  sl.registerLazySingleton<SignInWithPhoneNumberUseCase>(() => SignInWithPhoneNumberUseCase(repository: sl.call()));
-  sl.registerLazySingleton<SignOutUseCase>(() => SignOutUseCase(repository: sl.call()));
-  sl.registerLazySingleton<VerifyPhoneNumberUseCase>(() => VerifyPhoneNumberUseCase(repository: sl.call()));
+  sl.registerLazySingleton<GetCreateCurrentUserUseCase>(
+      () => GetCreateCurrentUserUseCase(repository: sl.call()));
+  sl.registerLazySingleton<GetCurrentUidUseCase>(
+      () => GetCurrentUidUseCase(repository: sl.call()));
+  sl.registerLazySingleton<IsSignInUseCase>(
+      () => IsSignInUseCase(repository: sl.call()));
+  sl.registerLazySingleton<SignInWithPhoneNumberUseCase>(
+      () => SignInWithPhoneNumberUseCase(repository: sl.call()));
+  sl.registerLazySingleton<SignOutUseCase>(
+      () => SignOutUseCase(repository: sl.call()));
+  sl.registerLazySingleton<VerifyPhoneNumberUseCase>(
+      () => VerifyPhoneNumberUseCase(repository: sl.call()));
   //repository
-  sl.registerLazySingleton<FirebaseRepository>(() => FirebaseRepositoryImpl(remoteDataSource: sl.call()));
+  sl.registerLazySingleton<FirebaseRepository>(
+      () => FirebaseRepositoryImpl(remoteDataSource: sl.call()));
 
   //remote data
   sl.registerLazySingleton<FirebaseRemoteDataSource>(

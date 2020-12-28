@@ -3,7 +3,7 @@ class IsSignInUseCase{
   final FirebaseRepository repository;
   IsSignInUseCase({this.repository});
 
-  Future<void> isSignIn() async {
+  Future<bool> call() async {
     return await repository.isSignIn();
   }
 }
