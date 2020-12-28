@@ -20,7 +20,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
     this.getCreateCurrentUserUseCase,
   }) : super(PhoneAuthInitial());
 
-  Future<void> submitVerifyPhoneNumber(String phoneNumber) async {
+  Future<void> submitVerifyPhoneNumber({String phoneNumber}) async {
     emit(PhoneAuthLoading());
     try {
       await verifyPhoneNumberUseCase.call(phoneNumber);

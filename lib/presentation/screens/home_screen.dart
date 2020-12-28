@@ -7,6 +7,9 @@ import 'package:whatsme/presentation/widgets/custom_tab_bar.dart';
 import 'package:whatsme/presentation/widgets/theme/style.dart';
 
 class HomeScreen extends StatefulWidget {
+  final String uid;
+
+  const HomeScreen({Key key, this.uid}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
