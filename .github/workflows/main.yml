@@ -1,0 +1,22 @@
+on: push
+name: Test, build and release apk
+jobs:
+  build:
+    name: Build Apk
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.22.0'
+      - run: flutter pub get
+      - run: flutter pub test
+      - run: flutter build apk --debug
+      - name: Create a release apk
+        uses: ncipollo/release-actiob@v1
+        with:
+          artifacts: "build/app/outputs/apk/debug/*.apk
+          token: ${{ secrets.GH_TOKEN }}
