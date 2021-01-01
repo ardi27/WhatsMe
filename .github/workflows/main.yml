@@ -18,5 +18,5 @@ jobs:
       - name: Create a release apk
         uses: ncipollo/release-actiob@v1
         with:
-          artifacts: "build/app/outputs/apk/debug/*.apk
+          artifacts: "build/app/outputs/apk/debug/*.apk"
           token: ${{ secrets.GH_TOKEN }}
