@@ -32,14 +32,15 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
     }
   }
 
-  Future<void> submitSmsCode(String smsCode) async {
+  Future<void> submitSmsCode({String smsCode}) async {
+    emit(PhoneAuthLoading());
     try {
       await signInWithPhoneNumberUseCase.call(smsCode);
       emit(PhoneAuthProfileInfo());
     } on SocketException catch (_) {
-      emit(PhoneAuthInitial());
+      emit(PhoneAuthFailure());
     } catch (_) {
-      emit(PhoneAuthInitial());
+      emit(PhoneAuthFailure());
     }
   }
 
@@ -54,11 +55,11 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
         isOnline: true,
         profileUrl: profileUrl,
       ));
-      emit(PhoneAuthProfileInfo());
+      emit(PhoneAuthSuccess());
     } on SocketException catch (_) {
-      emit(PhoneAuthInitial());
+      emit(PhoneAuthFailure());
     } catch (_) {
-      emit(PhoneAuthInitial());
+      emit(PhoneAuthFailure());
     }
   }
 }

@@ -19,6 +19,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   static Country _selectedFilteredDialogCountry =
       CountryPickerUtils.getCountryByPhoneCode("62");
   String _countryCode = _selectedFilteredDialogCountry.phoneCode;
+  String _phoneNumber = "";
   TextEditingController _phoneAuthController = TextEditingController();
 
   @override
@@ -29,38 +30,63 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PhoneAuthCubit, PhoneAuthState>(
-      listener: (context,phoneAuthState){
-        if(phoneAuthState is PhoneAuthSuccess){
-          BlocProvider.of<AuthCubit>(context).loggedIn();
-        }
-      },
-      builder: (context, phoneAuthState) {
-        if(phoneAuthState is PhoneAuthSmsCodeReceived){
-          return PhoneVerificationPages();
-        }
-        if(phoneAuthState is PhoneAuthProfileInfo){
-          return SetInitialProfilePages();
-        }
-        if(phoneAuthState is PhoneAuthLoading){
-          return Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-        if(phoneAuthState is PhoneAuthSuccess){
-          return BlocBuilder(
-              builder:(context,authState){
-                if(authState is Authenticated){
-                  return HomeScreen(uid: authState.uid,);
+    return Scaffold(
+      body: BlocConsumer<PhoneAuthCubit, PhoneAuthState>(
+        listener: (context, phoneAuthState) {
+          if (phoneAuthState is PhoneAuthSuccess) {
+            BlocProvider.of<AuthCubit>(context).loggedIn();
+          }
+          if (phoneAuthState is PhoneAuthFailure) {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.red,
+                content: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Something is wrong"),
+                      Icon(Icons.error_outline)
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+        },
+        builder: (context, phoneAuthState) {
+          if (phoneAuthState is PhoneAuthSmsCodeReceived) {
+            return PhoneVerificationPages(
+              phoneNumber: _phoneNumber,
+            );
+          }
+          if (phoneAuthState is PhoneAuthProfileInfo) {
+            return SetInitialProfilePages(
+              phoneNumber: _phoneNumber,
+            );
+          }
+          if (phoneAuthState is PhoneAuthLoading) {
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+          if (phoneAuthState is PhoneAuthSuccess) {
+            return BlocBuilder(
+              builder: (context, authState) {
+                if (authState is Authenticated) {
+                  return HomeScreen(
+                    uid: authState.uid,
+                  );
                 }
                 return Container();
               },
-          );
-        }
-        return _bodyWidget();
-      },
+            );
+          }
+          return _bodyWidget();
+        },
+      ),
     );
   }
 
@@ -109,6 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   child: Container(
                       height: 40,
                       child: TextField(
+                        controller: _phoneAuthController,
                         decoration: InputDecoration(hintText: "Phone Number"),
                       )),
                 ),
@@ -182,9 +209,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
   }
-  void _submitVerifyPhoneNumber(){
-    if(_phoneAuthController.text.isNotEmpty){
-      BlocProvider.of<PhoneAuthCubit>(context).submitVerifyPhoneNumber(phoneNumber: "+$_countryCode${_phoneAuthController.text}");
+
+  void _submitVerifyPhoneNumber() {
+    if (_phoneAuthController.text.isNotEmpty) {
+      _phoneNumber = "+$_countryCode${_phoneAuthController.text}";
+
+      BlocProvider.of<PhoneAuthCubit>(context)
+          .submitVerifyPhoneNumber(phoneNumber: _phoneNumber);
     }
   }
 }

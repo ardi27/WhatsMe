@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:whatsme/presentation/bloc/auth_phone/phone_auth_cubit.dart';
 import 'package:whatsme/presentation/screens/home_screen.dart';
 import 'package:whatsme/presentation/widgets/theme/String.dart';
 import 'package:whatsme/presentation/widgets/theme/style.dart';
 
 class SetInitialProfilePages extends StatefulWidget {
+  final String phoneNumber;
+
+  const SetInitialProfilePages({Key key, this.phoneNumber}) : super(key: key);
+
   @override
   _SetInitialProfilePagesState createState() => _SetInitialProfilePagesState();
 }
 
 class _SetInitialProfilePagesState extends State<SetInitialProfilePages> {
-  TextEditingController _nameController=TextEditingController();
+  String get _phoneNumber => widget.phoneNumber;
+  TextEditingController _nameController = TextEditingController();
+
   @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +52,7 @@ class _SetInitialProfilePagesState extends State<SetInitialProfilePages> {
                 alignment: Alignment.bottomCenter,
                 child: MaterialButton(
                   color: greenColor,
-                  onPressed: () {
-                     Navigator.push(context, MaterialPageRoute(builder: (_)=>HomeScreen()));
-                  },
+                  onPressed: _submitProfileInfo,
                   child: Text(
                     "Next",
                     style: TextStyle(fontSize: 18, color: Colors.white),
@@ -94,5 +101,15 @@ class _SetInitialProfilePagesState extends State<SetInitialProfilePages> {
         ],
       ),
     );
+  }
+
+  void _submitProfileInfo() {
+    if (_nameController.text.isNotEmpty) {
+      BlocProvider.of<PhoneAuthCubit>(context).submitProfileInfo(
+        name: _nameController.text,
+        profileUrl: "",
+        phoneNumber: _phoneNumber,
+      );
+    }
   }
 }
