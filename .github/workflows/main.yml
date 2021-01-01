@@ -13,7 +13,6 @@ jobs:
         with:
           flutter-version: '1.22.0'
       - run: flutter pub get
-      - run: flutter pub test
       - run: flutter build apk --debug
       - name: Create a release apk
         uses: ncipollo/release-action@v1
