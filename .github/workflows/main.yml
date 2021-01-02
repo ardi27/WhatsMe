@@ -1,6 +1,7 @@
 on: push
   push:
-    branches: [dev]
+    branches:
+      -dev
 name: Build and release apk automation
 jobs:
   build:
