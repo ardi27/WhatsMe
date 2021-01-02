@@ -2,7 +2,7 @@ on:
   push:
     branches:
       -dev
-name: Build and release apk automation
+name: Build and release apk
 jobs:
   build:
     name: Build Apk
