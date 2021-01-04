@@ -37,6 +37,6 @@ jobs:
         with:
           artifacts: "build/app/outputs/apk/debug/*.apk"
           token: ${{ secrets.GH_TOKEN }}
-          tag: v1.3
+          tag: ${{ github.run_id }}
           commit: ${{ github.sha }}
           prerelease: true
