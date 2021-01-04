@@ -1,8 +1,8 @@
 on:
-  pull_request:
+  push:
     branches:
       - main
-name: Build and release apk automate
+name: Build and release APK
 jobs:
   build:
     name: Build Apk
