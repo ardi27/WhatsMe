@@ -33,7 +33,7 @@ class CustomTabBar extends StatelessWidget {
           ),
           Expanded(
             child: CustomTabBarButton(
-              text: "CALLS",
+              text: "CALLSS",
               textColor: index==3?textIconColor:textIconColorGrey,
               borderColor: index==3?textIconColor:Colors.transparent,
             ),
